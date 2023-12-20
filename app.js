@@ -72,6 +72,7 @@ function searchMeal() {
         })
         .then(searchMealData => {
             displaySearchResults(searchMealData);
+            
         })
         .catch(error => {
             console.error('Error fetching search results:', error);
@@ -80,6 +81,7 @@ function searchMeal() {
 
 // Function to display search results
 function displaySearchResults(searchMealData) {
+    let a  = `<p id = "price2">Search Results</p>`
     let searchDataHTML = "";
     if (searchMealData.meals) {
         searchMealData.meals.forEach(meal => {
@@ -87,14 +89,16 @@ function displaySearchResults(searchMealData) {
                 <div id="randomMeal">
                     <div class="randomMealDescription" data-mealid="${meal.idMeal}">
                         <img src="${meal.strMealThumb}" alt="dish" id="dish">
-                        <pre class="abcd">${meal.strMeal}</pre>
+                        <p class="abcd">${meal.strMeal}</p>
                     </div>
                 </div>`;
         });
     } else {
         searchDataHTML = "<p>No results found</p>";
     }
+    document.querySelector('#r').innerHTML = a;
     document.querySelector('.search2').innerHTML = searchDataHTML;
+    
 
     // Attach event listeners after elements are created
     const mealDescriptions = document.querySelectorAll('.randomMealDescription');
@@ -117,6 +121,11 @@ function fetchMealIngredients(idMeal) {
         })
         .then(searchMealDetails => {
             displayMealIngredients(searchMealDetails);
+            document.querySelector('.ingredients').style.display = 'block'
+            window.scrollTo({
+                top: 750,
+                behavior: 'smooth' // Smooth scrolling animation
+            });
         })
         .catch(error => {
             console.error('Error fetching meal ingredients:', error);
@@ -125,6 +134,9 @@ function fetchMealIngredients(idMeal) {
 
 // Function to display meal ingredients
 function displayMealIngredients(searchMealDetails) {
+    document.querySelector('.ingredients').addEventListener('click',()=>{
+        document.querySelector('.ingredients').style.display = 'none'
+    })
     let ingredientsList = "<pre>";
     for (let i = 1; i <= 20; i++) {
         const ingredient = searchMealDetails.meals[0][`strIngredient${i}`];
@@ -136,17 +148,25 @@ function displayMealIngredients(searchMealDetails) {
     ingredientsList += "</pre>";
 
     const ingredientsHTML = `
-        <p>${searchMealDetails.meals[0].strMeal}</p>
-        <p><a href="${searchMealDetails.meals[0].strYoutube}">Recipe Video</a></p>
-        <p>Ingredients</p>
+        <pre>
+    ${searchMealDetails.meals[0].strMeal}
+        
+    Cuisine : ${searchMealDetails.meals[0].strArea}
+    Category : ${searchMealDetails.meals[0].strCategory}
+        
+    <a href="${searchMealDetails.meals[0].strYoutube}">Recipe Video</a>
+        
+    Ingredients
+        </pre>
         ${ingredientsList}`;
-
-    document.querySelector('.last').innerHTML = ingredientsHTML;
+    document.querySelector('.ingredients').innerHTML = ingredientsHTML;
+    
 }
 
 // Event listener for search button click
 document.querySelector('#searchButton').addEventListener('click', () => {
     searchMeal();
+    
 });
 
 // Initial call to fetch a random meal
