@@ -21,12 +21,15 @@ function displayRandomMeal(randomMealData) {
     let mealInfoHTML = `<p id="surprice">Surprise Dish</p>
         <div id="randomMealDescription">
             <img src="${randomMealData.meals[0].strMealThumb}" alt="dish" id="dish">
-            <pre>
-${randomMealData.meals[0].strMeal}
-
-Cuisine: ${randomMealData.meals[0].strArea}
-Category: ${randomMealData.meals[0].strCategory}
-            </pre>
+            <span class="pre">
+            <br>
+            ${randomMealData.meals[0].strMeal}
+            <br>
+            <br>
+            Cuisine: ${randomMealData.meals[0].strArea}
+            <br>
+            Category: ${randomMealData.meals[0].strCategory}
+            </span>
         </div>`;
 
     // Display ingredients
@@ -42,20 +45,20 @@ Category: ${randomMealData.meals[0].strCategory}
 
     let mealDetailsHTML = `
         <p>${randomMealData.meals[0].strMeal}</p>
-        <p><a href="${randomMealData.meals[0].strYoutube}">Recipe Video</a></p>
+        <p id="Video"><a href="${randomMealData.meals[0].strYoutube}">Recipe Video</a></p>
         <p>Ingredients</p>
         ${ingredientsList}`;
 
     // Display meal information and ingredients
     document.querySelector(".randomMeal").innerHTML = mealInfoHTML;
-    document.querySelector(".ingredients").innerHTML = mealDetailsHTML;
+    document.querySelector("#randomIngredients").innerHTML = mealDetailsHTML;
 
     // Add click event listener to toggle ingredients visibility
     document.querySelector("#randomMealDescription").addEventListener('click', () => {
-        document.querySelector(".ingredients").style.display = "block"
+        document.querySelector("#randomIngredients").style.display = "block"
     });
-    document.querySelector(".ingredients").addEventListener('click',()=>{
-        document.querySelector(".ingredients").style.display = 'none'
+    document.querySelector("#randomIngredients").addEventListener('click',()=>{
+        document.querySelector("#randomIngredients").style.display = "none"
     })
 }
 
@@ -94,7 +97,7 @@ function displaySearchResults(searchMealData) {
                 </div>`;
         });
     } else {
-        searchDataHTML = "<p>No results found</p>";
+        searchDataHTML = `<p class="pre">No results found</p>`;
     }
     document.querySelector('#r').innerHTML = a;
     document.querySelector('.search2').innerHTML = searchDataHTML;
@@ -121,10 +124,10 @@ function fetchMealIngredients(idMeal) {
         })
         .then(searchMealDetails => {
             displayMealIngredients(searchMealDetails);
-            document.querySelector('.ingredients').style.display = 'block'
+            document.querySelector('.searchIngredients').style.display = 'block'
             window.scrollTo({
-                top: 750,
-                behavior: 'smooth' // Smooth scrolling animation
+                top: 100,
+                behavior: 'smooth'
             });
         })
         .catch(error => {
@@ -134,8 +137,8 @@ function fetchMealIngredients(idMeal) {
 
 // Function to display meal ingredients
 function displayMealIngredients(searchMealDetails) {
-    document.querySelector('.ingredients').addEventListener('click',()=>{
-        document.querySelector('.ingredients').style.display = 'none'
+    document.querySelector('.searchIngredients').addEventListener('click',()=>{
+        document.querySelector('.searchIngredients').style.display = 'none'
     })
     let ingredientsList = "<pre>";
     for (let i = 1; i <= 20; i++) {
@@ -148,18 +151,16 @@ function displayMealIngredients(searchMealDetails) {
     ingredientsList += "</pre>";
 
     const ingredientsHTML = `
-        <pre>
-    ${searchMealDetails.meals[0].strMeal}
-        
+    <span class="pre">${searchMealDetails.meals[0].strMeal}</span>    
+    <pre>
     Cuisine : ${searchMealDetails.meals[0].strArea}
     Category : ${searchMealDetails.meals[0].strCategory}
-        
-    <a href="${searchMealDetails.meals[0].strYoutube}">Recipe Video</a>
+    <p id="Video"><a href="${searchMealDetails.meals[0].strYoutube}">Recipe Video</a></p>
         
     Ingredients
         </pre>
         ${ingredientsList}`;
-    document.querySelector('.ingredients').innerHTML = ingredientsHTML;
+    document.querySelector('.searchIngredients').innerHTML = ingredientsHTML;
     
 }
 
