@@ -172,6 +172,25 @@ a:hover{
     color: black;
     font-size: 30px;
 }
+.footer{
+    margin: 20px;
+    font-family: 'Jua';
+    font-size: 25px;
+    display: flex;
+    justify-content: space-evenly;
+}
+#links{
+    height: 40px;
+    width: 40px;
+}
+.social{
+    display: flex;
+    flex-direction: column;
+}
+#imgs{
+    display: flex;
+    justify-content: space-evenly;
+}
 /* CSS for mobile view and responsiveness */
 @media screen and (max-width: 768px) {
     body {
@@ -251,6 +270,13 @@ a:hover{
         position: static;
         top: auto;
         right: auto;
+    }
+    .footer{
+        font-size: 15px;
+    }
+    #imgs img{
+        height: 20px;
+        width: 20px;
     }
 }
 
