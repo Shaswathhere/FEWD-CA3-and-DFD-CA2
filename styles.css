@@ -225,8 +225,7 @@ a:hover{
         height: 30px;
         width: 30px;
         position: relative;
-        right: 10px;
-        top: 5px;
+        top: 10px;
     }
 
     /* Adjustments for the random meal and search results */
