@@ -1,8 +1,8 @@
-RECIPE RADAR :
+## RECIPE RADAR :
 
 Recipe Radar is a web application which is helped to dicover new and different types of recipes , flavors and worldwide cuisines . This application uses third party api to fetch random recipes and allows user to search for specific meal category .
 
-Features : 
+## Features : 
 
 Random meal generator 
 
@@ -10,7 +10,7 @@ Search meals according to category
 
 Responsive design
 
-Technologies Used :
+## Technologies Used :
 
 HTML
 
@@ -20,7 +20,9 @@ JAVASCRIPT
 
 API
 
-Credits : 
+## Credits : 
 
 mealDB API : Data source for fetching information is done using api in mealDB website
+
+## Deployed Link : https://shaswathhere.github.io/FEWD-CA3-and-DFD-CA2/
 
